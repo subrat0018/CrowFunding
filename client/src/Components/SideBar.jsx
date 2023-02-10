@@ -4,7 +4,6 @@ import "../Assets/index";
 import { dashboard, logo, thirdweb } from "../Assets/index";
 import { navlinks } from "../Constants/index";
 const Icon = (props) => {
-  console.log(props.active);
   return (
     <div
       onClick={props.handle}

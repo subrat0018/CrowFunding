@@ -1,8 +1,10 @@
 import React from "react";
 import { GiWallet } from "react-icons/gi";
 import { MdInsertDriveFile } from "react-icons/md";
-
-const WalletCard = () => {
+import { useUtils } from "../context/web3utils";
+import Web3 from "web3";
+let web3 = new Web3(Web3.givenProvider);
+const WalletCard = ({ account }) => {
   return (
     <div className="flex flex-row space-x-1">
       <GiWallet
@@ -19,7 +21,7 @@ const WalletCard = () => {
     </div>
   );
 };
-const DriveCard = () => {
+const DriveCard = ({ account }) => {
   return (
     <div className="flex flex-row space-x-1">
       <MdInsertDriveFile
@@ -46,25 +48,32 @@ const ProfileCard = ({ link, name, email, account }) => {
       ></img>
       <div className="flex flex-col justify-center items-center text-[#666666]">
         <span className=" text-xl font-semibold ">{`🧑 ${name}`}</span>
-        <span>{account}</span>
-        <span>{email}</span>
+        <span>{`🔑 ${account}`}</span>
+        <a href={email}>
+          <span>{`📧 ${email}`}</span>
+        </a>
       </div>
       <div className="flex flex-row space-x-10 mt-6 shadow-md bg-gray-100 border-4 p-4 rounded-2xl border-solid hover:cursor-pointer">
-        <WalletCard />
-        <DriveCard />
+        <WalletCard account={account} />
+        <DriveCard account={account} />
       </div>
     </div>
   );
 };
 const Profile = () => {
+  const [account, ...rest] = useUtils();
+  console.log(account);
+  if (account === undefined) {
+    return <div>Connect to the Wallet</div>;
+  }
   return (
-    <div>
+    <div className=" flex w-2/4 justify-center items-center m-auto bg-gray-100 shadow-2xl rounded-3xl mt-8">
       <ProfileCard
         link={
           "https://www.bigbash.com.au/-/media/Players/Men/International/India/Virat-Kohli-T20I2020.ashx"
         }
         name={"Subrat Chandra Naha"}
-        account={"xxxxxxxxxxxxxxxxxxxxxxxxxxxx"}
+        account={account}
         email={"subratchandra2003@gmail.com"}
       />
     </div>
