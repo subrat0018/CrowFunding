@@ -1,11 +1,9 @@
 import React from "react";
-import { useState } from "react";
 import crowdFunding from "../Assets/crowdfunding.png";
-import { useUtils } from "../context/web3utils";
+import { usePresentDrives } from "../context/web3utils";
 import ProjectCard from "../Components/ProjectCard";
 const Home = () => {
-  const a = useUtils();
-  const presentDrives = a.slice(-1)[0];
+  const presentDrives = usePresentDrives();
   return (
     <div className="m-6">
       <div className=" flex flex-row justify-between">

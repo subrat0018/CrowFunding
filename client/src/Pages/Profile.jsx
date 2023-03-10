@@ -1,8 +1,8 @@
 import React from "react";
 import { GiWallet } from "react-icons/gi";
 import { MdInsertDriveFile } from "react-icons/md";
-import { useUtils } from "../context/web3utils";
 import Web3 from "web3";
+import { userAddress } from "../context/web3utils";
 let web3 = new Web3(Web3.givenProvider);
 const WalletCard = ({ account }) => {
   return (
@@ -61,8 +61,7 @@ const ProfileCard = ({ link, name, email, account }) => {
   );
 };
 const Profile = () => {
-  const [account, ...rest] = useUtils();
-  console.log(account);
+  const account = userAddress();
   if (account === undefined) {
     return <div>Connect to the Wallet</div>;
   }

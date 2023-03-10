@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import pic from "../Assets/profile.png";
-import { useUtils } from "../context/web3utils";
+import { userAddress } from "../context/web3utils";
 import CreateDriveButton from "./CreateDriveButton";
 import MetaMaskButton from "./ConnectMetaMask";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const [address, connectWithMetaMask] = useUtils();
+  const address = userAddress();
   return (
     <div className="mt-4">
       <nav class="w-full p-3 border-gray-400 rounded bg-gradient-to-r from-gray-50 to-gray-200 dark:bg-gray-800 dark:border-gray-700 just">
@@ -63,11 +63,7 @@ const NavBar = () => {
           </form>
 
           <div class="flex w-5/12 justify-end">
-            {address === undefined ? (
-              <MetaMaskButton connectWithMetaMask={connectWithMetaMask} />
-            ) : (
-              <CreateDriveButton />
-            )}
+            {address ? <CreateDriveButton /> : <MetaMaskButton />}
           </div>
           <Link to="/profile" class="flex items-center md:order-2">
             <button

@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { useState } from "react";
-import { useUtils } from "../context/web3utils";
+import { userAddress, useCreateDrive } from "../context/web3utils";
 import Web3 from "web3";
 let web3 = new Web3(Web3.givenProvider);
-console.log(web3);
 const FormItem = ({ name, id, placeholder, form, setForm }) => {
   return (
     <div>
@@ -36,9 +35,8 @@ const CreateDrive = () => {
     date: "",
     uimg: "",
   });
-  const [address, , createCamp] = useUtils();
-  console.log(form.date);
-  console.log(new Date(form.date).getTime());
+  const address = userAddress();
+  const createCamp = useCreateDrive();
   return (
     <div className=" m-12 flex flex-col justify-center items-center bg-gray-100 shadow-xl rounded-2xl">
       <div className=" bg-gray-300 w-1/5 h-12 flex justify-center items-center rounded-lg shadow-sm mb-8 mt-4">
@@ -116,6 +114,8 @@ const CreateDrive = () => {
             onClick={() => {
               const date = new Date(form.date);
               const seconds = date.getTime();
+              console.log("Clicked");
+              console.log(createCamp);
               createCamp([
                 form.title,
                 form.story,
