@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Profile from "./Pages/Profile";
 import CreateDrive from "./Pages/CreateDrive";
+import DriveDetails from "./Pages/DriveDetails";
 import SideBar from "./Components/SideBar";
 import NavBar from "./Components/NavBar";
 import { Web3Provider } from "./context/web3utils";
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/create-drive" element={<CreateDrive />} />
+            <Route path="/drive-details" element={<DriveDetails />} />
           </Routes>
         </Web3Provider>
       </div>

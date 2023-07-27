@@ -5,11 +5,12 @@ contract CrowdFunding {
     struct Drive {
         string title;
         string description;
+        string imgurl;
+        address owner;
         uint256 targetAmount;
         uint256 amountCollected;
         uint256 deadline;
-        address owner;
-        string imgurl;
+        uint256 driveId;
         address[] donors;
         uint256[] donations;
     }
@@ -38,6 +39,7 @@ contract CrowdFunding {
         newDrive.imgurl = _imgurl;
 
         uint256 currDriveId = totalDrive;
+        newDrive.driveId = currDriveId;
         persons[_owner].push(currDriveId);
 
         totalDrive++;
@@ -54,11 +56,9 @@ contract CrowdFunding {
         personDonation[msg.sender] += msg.value;
     }
 
-    function getDonors(uint256 _driveId)
-        public
-        view
-        returns (address[] memory, uint256[] memory)
-    {
+    function getDonors(
+        uint256 _driveId
+    ) public view returns (address[] memory, uint256[] memory) {
         require(_driveId < totalDrive, "The DriveId is not correct");
         return (drives[_driveId].donors, drives[_driveId].donations);
     }
@@ -71,11 +71,9 @@ contract CrowdFunding {
         return allDrives;
     }
 
-    function getDriveByPerson(address _owner)
-        public
-        view
-        returns (Drive[] memory)
-    {
+    function getDriveByPerson(
+        address _owner
+    ) public view returns (Drive[] memory) {
         uint256 n = persons[_owner].length;
         Drive[] memory personDrives = new Drive[](n);
 
